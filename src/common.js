@@ -11,3 +11,13 @@ const wallet = new ethers.Wallet(priv, provider);
 exports.provider = provider;
 exports.wallet = wallet;
 
+
+async function sleep(seconds) {
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			resolve();
+		}, seconds);
+	});
+}
+
+exports.sleep = sleep;

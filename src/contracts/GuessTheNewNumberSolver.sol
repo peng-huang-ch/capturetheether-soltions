@@ -6,9 +6,10 @@ interface IGuessTheNewNumberChallenge {
 }
 
 contract GuessTheNewNumberSolver {
-     event Received(address, uint);
     IGuessTheNewNumberChallenge public challenge;
     address payable private owner;
+
+    event Received(address, uint);
 
     constructor(address _challengeAddress) {
         challenge = IGuessTheNewNumberChallenge(_challengeAddress);
