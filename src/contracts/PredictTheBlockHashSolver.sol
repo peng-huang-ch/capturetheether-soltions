@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.7;
 
-interface IPredictTheFutureChallenge {
-    function lockInGuess(uint8 number) external payable;
+interface IPredictTheBlockHashChallenge {
+    function lockInGuess(bytes32 hash) external payable;
     function settle() external;
     function isComplete() external view returns(bool);
 }
 
-contract PredictTheFutureSolver {
-    IPredictTheFutureChallenge public challenge;
+contract PredictTheBlockHashSolver {
+    IPredictTheBlockHashChallenge public challenge;
     address payable public owner;
     
     event Received(address, uint);
@@ -20,16 +20,15 @@ contract PredictTheFutureSolver {
 
     function proxy(address challengeAddress) public {
         require(msg.sender == owner, "Only the owner can set challenge address");
-        challenge = IPredictTheFutureChallenge(challengeAddress);
+        challenge = IPredictTheBlockHashChallenge(challengeAddress);
     }
 
 
-    function predict(uint8 n) public payable {
-        require(msg.sender == owner, "Only the owner can predict the number");
-        require(msg.value == 1 ether, "You must send 1 ether to predict the number");
-        require(n >= 0 && n <= 9, "Number must be in the 0-9 range");
+    function predict(bytes32 hash) public payable {
+        require(msg.sender == owner, "Only the owner can predict the block hash");
+        require(msg.value == 1 ether, "You must send 1 ether to predict the block hash");
         
-        challenge.lockInGuess{value: msg.value}(n);
+        challenge.lockInGuess{value: msg.value}(hash);
     }
 
     function solve() public payable {

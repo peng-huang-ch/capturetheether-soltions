@@ -3,19 +3,15 @@ const { utils, Contract } = require('ethers');
 
 var { wallet, provider, sleep } = require('./common')
 
-const contractAddress = '0x7041ABb6B0deF6F6A47f7568afBbEee6BB189b1C';
+const contractAddress = '0x2e7da1240640cced8e14a54885b5624d99ab1fbb';
 
-
-// you need to make two transactions: 
-//  1. predict the future number
-//  2. call the solve function, if fail, you will get the reward, otherwise you will get nothing but lost some transaction fee
 async function main() {
 	const iface = new utils.Interface([
 		'event Received(address, uint256)',
 		'event challengeSolved(uint256 balance)',
 		'function challenge() view returns (address)',
 		'function destroy()',
-		'function predict(uint8 n) payable',
+		'function predict(bytes32 hash) payable',
 		'function solve() payable',
 		'function proxy(address challengeAddress)'
 	]);
@@ -31,8 +27,11 @@ async function main() {
 	let contractWithSigner = contract.connect(wallet);
 
 	// 1. call the predict function
-	// const options = { value: utils.parseEther("1.0") }
-	// let tx = await contractWithSigner.predict(1, options);
+	// const options = { value: utils.parseEther('1.0') }
+	// var tx = await contractWithSigner.predict('0x0000000000000000000000000000000000000000000000000000000000000000', options);
+	// var result = await tx.wait();
+	// console.log(result);
+	// return;
 
 	// 2. call the solve function, maybe take too long to wait for the solved
 	for (let i = 0; i < 1000; i++) {
