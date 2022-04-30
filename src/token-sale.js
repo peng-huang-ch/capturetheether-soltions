@@ -20,7 +20,7 @@ async function main() {
 	]);
 
 	var contract = new Contract(contractAddress, iface, provider);
-	let contractWithSigner = contract.connect(wallet);
+	var contractWithSigner = contract.connect(wallet);
 
 	const Max = BigNumber.from(2).pow(256).sub(1);
 	const Ether = utils.parseEther("1.0");
@@ -38,7 +38,6 @@ async function main() {
 	var tx = await contractWithSigner.sell(1);
 	var result = await tx.wait();
 	console.log('sell result : ', result);
-	console.log('done..')
 }
 
 main().catch(console.error);

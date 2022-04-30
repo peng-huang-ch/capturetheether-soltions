@@ -22,3 +22,9 @@
 | `Guess the secret number`| ✅        |
 | `Guess the random number`| ✅        |
 | `Guess the new number`   | ✅        |
+
+-------------------
+
+## Refer
+
+[以太坊智能合约中随机数预测](https://www.freebuf.com/vuls/179173.html)

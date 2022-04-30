@@ -5,7 +5,6 @@ var { wallet, provider, sleep } = require('./common')
 
 const contractAddress = '0x7041ABb6B0deF6F6A47f7568afBbEee6BB189b1C';
 
-
 // you need to make two transactions: 
 //  1. predict the future number
 //  2. call the solve function, if fail, you will get the reward, otherwise you will get nothing but lost some transaction fee

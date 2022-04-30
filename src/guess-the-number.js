@@ -21,5 +21,4 @@ async function main() {
 	console.log(result);
 }
 
-
 main().catch(console.error);

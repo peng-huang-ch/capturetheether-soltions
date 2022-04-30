@@ -18,12 +18,11 @@ async function main() {
 	]);
 	var contract = new Contract(contractAddress, iface, provider);
 	let contractWithSigner = contract.connect(wallet);
-	const options = { value: utils.parseEther("1.0") }
+	const options = { value: utils.parseEther("1.0") };
 	let tx = await contractWithSigner.solve(options);
 
 	var result = await tx.wait();
 	console.log(result);
 }
-
 
 main().catch(console.error);
