@@ -23,7 +23,6 @@ contract PredictTheBlockHashSolver {
         challenge = IPredictTheBlockHashChallenge(challengeAddress);
     }
 
-
     function predict(bytes32 hash) public payable {
         require(msg.sender == owner, "Only the owner can predict the block hash");
         require(msg.value == 1 ether, "You must send 1 ether to predict the block hash");
