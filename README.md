@@ -28,3 +28,5 @@
 ## Refer
 
 [以太坊智能合约中随机数预测](https://www.freebuf.com/vuls/179173.html)
+[capture-the-ether-solutions](https://cmichel.io/capture-the-ether-solutions/)
+[capture-the-ether](https://godorz.info/2021/08/capture-the-ether/)
